@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/TranformXML/CopilotIndices/17.12.38.29086
+/.vs/TranformXML/FileContentIndex
+/.vs/TranformXML/FileContentIndex/18556443-da84-4300-818a-ee9a274c7365.vsidx
+/.vs/TransformXML/CopilotIndices/17.12.38.29086
+/build/TransformXML2/localpycs
+/.vs/TransformXML/FileContentIndex
+/.vs/TranformXML/v17
+/.vs
+/.gitignore
+/.gitignore
