@@ -45,7 +45,7 @@ EMAIL_CONFIG = {
 # Aplankai
 archive_directory = 'Archyvas/'
 updated_directory = 'Pakeisti_failai/'
-
+retailer_directory = updated_directory + 'Platintojai'
 
 transcription_map = {
     # Russian characters
@@ -166,7 +166,7 @@ def process_files(files, all_data):
             process_csv(file)
     custom_print("Failų apdorojimas baigtas")
 
-def process_xml(file, all_data):
+def process_xml(file, all_data, error_messages):
     try:
         custom_print(f"Apdorojamas XML failas: {file}")
         parser = etree.XMLParser(recover=True)
@@ -243,8 +243,9 @@ def process_xml(file, all_data):
         error_message = f"XML apdorojimas nepavyko failui {file}: {str(e)}"
         custom_print(error_message)
         logging.error(error_message)
+        error_messages.append(error_message)
 
-def process_excel(file):
+def process_excel(file, error_messages):
     try:
         custom_print(f"Apdorojamas Excel failas: {file}")
         df = pd.read_excel(file)
@@ -255,8 +256,9 @@ def process_excel(file):
         error_message = f"Excel apdorojimas nepavyko failui {file}: {str(e)}"
         custom_print(error_message)
         logging.error(error_message)
+        error_messages.append(error_message)
 
-def process_csv(file):
+def process_csv(file, error_messages):
     try:
         custom_print(f"Apdorojamas CSV failas: {file}")
         df = pd.read_csv(file)
@@ -267,7 +269,7 @@ def process_csv(file):
         error_message = f"CSV apdorojimas nepavyko failui {file}: {str(e)}"
         custom_print(error_message)
         logging.error(error_message)
-
+        error_messages.append(error_message)
 
 # Siųsti el. pašto pranešimą su klaidos informacija
 def send_error_email(config, error_messages):
@@ -415,7 +417,7 @@ def main():
             file_extension = os.path.splitext(file)[1].lower()
             
             # Patikriname ar failo pavadinimas prasideda "Settlement Report"
-            if file.startswith("Settlement Report") and file_extension == '.csv':
+            if "Settlement Report" and file.endswith('.csv'):
                 if not os.path.exists(updated_directory):
                     os.makedirs(updated_directory)
                 new_location = os.path.join(updated_directory, os.path.basename(file))
@@ -432,13 +434,22 @@ def main():
                 custom_print(f"Failas {file} perkeltas į {updated_directory} be apdorojimo.")
                 continue
 
+            # Patikriname ar tai platintojo failas arba date_usage_wallet failas
+            if ("Retailer" in os.path.basename(file) and file.endswith('.xml')) or "date_usage_wallet" in os.path.basename(file):
+               if not os.path.exists(retailer_directory):
+                   os.makedirs(retailer_directory)
+               new_location = os.path.join(retailer_directory, os.path.basename(file))
+               shutil.move(file, new_location)
+               custom_print(f"Failas {file} perkeltas į Platintojai direktoriją")
+               continue
+
             # Apdorojame likusius failus
             if file_extension == '.xml':
-                process_xml(file, all_data)
+                process_xml(file, all_data, error_messages)
             elif file_extension == '.xlsx':
-                process_excel(file)
+                process_excel(file, error_messages)
             elif file_extension == '.csv':
-                process_csv(file)
+                 process_csv(file, error_messages)
 
         # Perkeliame originalius Excel failus į "Archyvas" direktoriją
         for excel_file in excel_files:
@@ -454,7 +465,7 @@ def main():
         try:
             remote_files = sftp_ridango.listdir(SFTP_CONFIG['REMOTE_PATH'])
             for remote_file in remote_files:
-                if remote_file.endswith('.xml'):
+                if remote_file.endswith('.xml') or remote_file.endswith('.csv'):
                     remote_file_path = os.path.join(SFTP_CONFIG['REMOTE_PATH'], remote_file)
                     archive_file_path = os.path.join(SFTP_CONFIG['ARCHIVE_PATH'], remote_file)
                     try:

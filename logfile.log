@@ -1,0 +1,24 @@
+2025-01-14 11:17:38 ERROR Klaida: Negalima priskirti clientID ir clientVATID, nes company_code arba vat_id yra tuščias. Kliento informacija: <Client clientName="Socialin&#x117; sinergija, V&#x161;&#x12E;">
+    <InvoiceData InvoiceDate="2025-01-09" InvoiceType="0" OrderNo="6612191" InvoiceNo="">
+      <ProductData gLedgerAccountNo="511010" ProductSalesDate="2025-01-09" ProductValidFor="30" TotalSum="2900" TotalVAT="239" notVATapplicable="0" CurrencyCode="EUR" VAT="9" CostCentre="9EPARDUOT"/>
+    </InvoiceData>
+  </Client>
+  
+2025-01-14 11:17:38 ERROR Klaida: Negalima priskirti clientID ir clientVATID, nes company_code arba vat_id yra tuščias. Kliento informacija: <Client clientName="Europos Savanori&#x173; Tarnybos Asociacija &quot;Saltes&quot;">
+    <InvoiceData InvoiceDate="2025-01-09" InvoiceType="0" OrderNo="6612671" InvoiceNo="">
+      <ProductData gLedgerAccountNo="511010" ProductSalesDate="2025-01-09" ProductValidFor="90" TotalSum="8100" TotalVAT="669" notVATapplicable="0" CurrencyCode="EUR" VAT="9" CostCentre="9EPARDUOT"/>
+    </InvoiceData>
+  </Client>
+  
+2025-01-14 11:17:40 ERROR Klaida: Negalima priskirti clientID ir clientVATID, nes company_code arba vat_id yra tuščias. Kliento informacija: <Client clientName="V&#x161;&#x12E; &quot;Ma&#x17E;ieji &#x161;neku&#x10D;iai&quot;">
+    <InvoiceData InvoiceDate="2025-01-10" InvoiceType="0" OrderNo="6621238" InvoiceNo="">
+      <ProductData gLedgerAccountNo="511010" ProductSalesDate="2025-01-10" ProductValidFor="0" TotalSum="750" TotalVAT="62" notVATapplicable="0" CurrencyCode="EUR" VAT="9" CostCentre="9EPARDUOT"/>
+    </InvoiceData>
+  </Client>
+  
+2025-01-14 11:17:41 ERROR Klaida: Negalima priskirti clientID ir clientVATID, nes company_code arba vat_id yra tuščias. Kliento informacija: <Client clientName="Luk&#x161;i&#x173; eko &#x16B;kis, MB">
+    <InvoiceData InvoiceDate="2025-01-12" InvoiceType="0" OrderNo="6628406" InvoiceNo="">
+      <ProductData gLedgerAccountNo="511010" ProductSalesDate="2025-01-12" ProductValidFor="0" TotalSum="780" TotalVAT="64" notVATapplicable="0" CurrencyCode="EUR" VAT="9" CostCentre="9EPARDUOT"/>
+    </InvoiceData>
+  </Client>
+  
