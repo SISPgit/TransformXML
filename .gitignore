@@ -12,3 +12,6 @@
 /.vs
 /.gitignore
 /.gitignore
+/build/TransformXML2
+/dist
+/TransformXML2.spec
